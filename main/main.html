@@ -1,0 +1,82 @@
+<div>
+  <div class="main-content">
+    <form name="form" ng-submit="$ctrl.analyzeResume()">
+
+      <!-- component for file upload -->
+      <div class="row col-md-2">
+        <div class="input-group">
+          <h4>Choose a file</h4>
+
+          <div>
+            <label class="btn btn-primary btn-file upload-button">
+              Browse <input type="file" value="fileValue" id="file" class="hidden">
+            </label>
+            {{file}}
+          </div>
+        </div>
+      </div>
+
+      <br clear="all">
+      <hr size="2">
+
+      <!-- text area for the entry of key words -->
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <h4>Add Keywords You Want To Search</h4>
+          <div class="input-group">
+
+            <input type="text" class="form-control" placeholder="Enter Keywords..." ng-model="$ctrl.newWord">
+
+            <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="$ctrl.addToList()">Add!</button>
+        </span>
+
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div>
+
+      <br clear="all">
+
+      <div class="row" style="margin-left:2px;">
+        <h4>Keyword List</h4>
+        <div class="col-md-2  col-sm-3 col-xs-6 well">
+          <span ng-repeat="word in $ctrl.wordList">
+            {{word}},
+          </span>
+        </div>
+      </div>
+
+      <br clear="all">
+      <hr size="2">
+
+      <!-- will call function that sends http request for processing -->
+      <input type="submit" class="btn btn-primary upload-button">
+
+    </form>
+
+    <br clear="all">
+    <hr size="2">
+
+    <!-- table to display results -->
+    <div>
+
+      <table class="table">
+
+        <thead>
+          <th>Search Term</th>
+          <th>Found in Resume</th>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="resObj in $ctrl.results" class={{resObj.class}}>
+            <td>{{resObj.word}}</td>
+            <td>{{resObj.found}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
